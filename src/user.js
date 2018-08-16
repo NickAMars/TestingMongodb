@@ -12,11 +12,24 @@ const userSchema = new Schema({
   },
   likes:Number,
   // postCount: Number,
-  posts: [PostSchema] //embedded resource
+  posts: [PostSchema], //embedded resource
+  blogPosts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'blogPost'
+  }]
 });
 
 userSchema.virtual('postCount').get( function(){
   return this.posts.length;
+});
+/*
+  before remove is called
+  remove all blogPost
+*/
+userSchema.pre('remove', async function(next){
+  const BlogPost = mongoose.model('blogPost');
+  await BlogPost.remove({ _id: { $in : this.blogPosts }});
+  next();
 });
 
 const User = mongoose.model('user',  userSchema);
