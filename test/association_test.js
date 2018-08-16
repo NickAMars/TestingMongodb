@@ -9,9 +9,7 @@ describe('Association', ()=>{
   beforeEach( async () => {
     dovber = new User({ name: 'Dovber'});
     blogPost = new BlogPost({ title: 'Thank Life Your Alive', content: 'we drink until morning (blogPost)'});
-    comment = new Comment({ content: 'Congrats on greats i know you can (post)'})
-
-
+    comment = new Comment({ content: 'Congrats on greats i know you can (post)'});
     dovber.blogPosts.push(blogPost);
     blogPost.comments.push(comment);
     comment.user = dovber;
