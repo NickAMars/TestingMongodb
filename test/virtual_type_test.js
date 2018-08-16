@@ -9,7 +9,6 @@ describe('Virtual type', ()=>{
     });
     await dovber.save();
     const friend  = await User.findOne({ name: 'Dovber'});
-
     assert(friend.postCount === 1);
   });
 });
